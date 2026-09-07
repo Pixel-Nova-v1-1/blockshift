@@ -65,34 +65,39 @@ export function PageFrame({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToNextPage, goToPrevPage]);
 
-  // Framer Motion 3D Page Turn Variants
+  // Framer Motion 3D Page Turn Variants — Buttery Smooth Physical Paper Flip
   const pageVariants = {
     enter: (dir: number) => ({
-      rotateY: dir > 0 ? 80 : -80,
+      rotateY: dir > 0 ? 60 : -60,
+      x: dir > 0 ? 30 : -30,
       opacity: 0,
-      scale: 0.96,
+      scale: 0.98,
       transformOrigin: dir > 0 ? "left center" : "right center",
     }),
     center: {
       rotateY: 0,
+      x: 0,
       opacity: 1,
       scale: 1,
       transformOrigin: "center center",
       transition: {
-        rotateY: { type: "spring" as const, stiffness: 180, damping: 22, mass: 0.9 },
-        opacity: { duration: 0.25 },
-        scale: { duration: 0.3 },
+        rotateY: { duration: 0.52, ease: [0.16, 1, 0.3, 1] as const },
+        x: { duration: 0.52, ease: [0.16, 1, 0.3, 1] as const },
+        scale: { duration: 0.52, ease: [0.16, 1, 0.3, 1] as const },
+        opacity: { duration: 0.38, ease: "easeOut" as const },
       },
     },
     exit: (dir: number) => ({
-      rotateY: dir > 0 ? -80 : 80,
+      rotateY: dir > 0 ? -60 : 60,
+      x: dir > 0 ? -30 : 30,
       opacity: 0,
-      scale: 0.96,
+      scale: 0.98,
       transformOrigin: dir > 0 ? "left center" : "right center",
       transition: {
-        rotateY: { type: "spring" as const, stiffness: 200, damping: 24, mass: 0.9 },
-        opacity: { duration: 0.2 },
-        scale: { duration: 0.25 },
+        rotateY: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+        x: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+        scale: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const },
+        opacity: { duration: 0.3, ease: "easeIn" as const },
       },
     }),
   };
@@ -105,12 +110,12 @@ export function PageFrame({
   return (
     <div className="relative flex-1 w-full overflow-hidden flex flex-col justify-between perspective-book bg-[#FAF6EE]">
       {/* Subtle Book Spine / Page Texture Illusion on Borders */}
-      <div className="absolute inset-y-0 left-0 w-2.5 bg-gradient-to-r from-black/15 to-transparent pointer-events-none z-30" />
-      <div className="absolute inset-y-0 right-0 w-2.5 bg-gradient-to-l from-black/15 to-transparent pointer-events-none z-30" />
+      <div className="absolute inset-y-0 left-0 w-3 bg-gradient-to-r from-black/15 via-black/5 to-transparent pointer-events-none z-30" />
+      <div className="absolute inset-y-0 right-0 w-3 bg-gradient-to-l from-black/15 via-black/5 to-transparent pointer-events-none z-30" />
 
       {/* Main 3D Animated Page Canvas */}
       <div className="relative flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-8 preserve-3d flex items-center justify-center">
-        <AnimatePresence mode="wait" custom={direction}>
+        <AnimatePresence mode="popLayout" custom={direction}>
           <motion.div
             key={currentChapterIndex}
             custom={direction}
@@ -122,17 +127,25 @@ export function PageFrame({
             dragConstraints={{ left: 0, right: 0 }}
             dragElastic={0.2}
             onDragEnd={(_, info) => {
-              const swipeThreshold = 60;
-              const swipeVelocity = 300;
+              const swipeThreshold = 50;
+              const swipeVelocity = 250;
               if (info.offset.x < -swipeThreshold || info.velocity.x < -swipeVelocity) {
                 goToNextPage();
               } else if (info.offset.x > swipeThreshold || info.velocity.x > swipeVelocity) {
                 goToPrevPage();
               }
             }}
-            className="w-full h-full flex flex-col justify-center backface-hidden"
+            className="w-full h-full flex flex-col justify-center backface-hidden will-change-transform"
           >
-            {/* Soft Drop-Shadow along turning edge */}
+            {/* Dynamic Page Curl Drop-Shadow Layer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.15, 0] }}
+              transition={{ duration: 0.52, ease: "easeInOut" }}
+              className="absolute inset-0 pointer-events-none z-30 bg-gradient-to-r from-black/15 via-transparent to-black/15 rounded-xs"
+            />
+
+            {/* Page Content */}
             <div className="relative w-full h-full">
               {children}
             </div>

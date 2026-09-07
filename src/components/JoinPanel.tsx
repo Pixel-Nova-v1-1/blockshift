@@ -5,7 +5,7 @@ import confetti from "canvas-confetti";
 import { ComicPanel } from "./ComicPanel";
 import { InkButton } from "./InkButton";
 import { SpeechBubble } from "./SpeechBubble";
-import { ShieldCheck, Sparkles, User, Mail, Compass, Award, AlertCircle, Loader2 } from "lucide-react";
+import { ShieldCheck, Sparkles, User, Mail, Compass, Award, AlertCircle, Loader2, Cpu, Palette, Cloud, Smartphone, Zap } from "lucide-react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
@@ -133,10 +133,26 @@ export function JoinPanel() {
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
-                  { id: "ai-summoner", label: "AI & ML", icon: "🧠", color: "border-[#34A853]" },
-                  { id: "pixel-paladin", label: "Frontend & UI", icon: "🎨", color: "border-[#4285F4]" },
-                  { id: "cloud-sorcerer", label: "Cloud & DevOps", icon: "☁️", color: "border-[#FBBC05]" },
-                  { id: "mobile-ranger", label: "Android & IoT", icon: "📱", color: "border-[#A855F7]" },
+                  {
+                    id: "ai-summoner",
+                    label: "AI & ML",
+                    icon: <Cpu className="w-5 h-5 text-[#34A853]" />,
+                  },
+                  {
+                    id: "pixel-paladin",
+                    label: "Frontend & UI",
+                    icon: <Palette className="w-5 h-5 text-[#4285F4]" />,
+                  },
+                  {
+                    id: "cloud-sorcerer",
+                    label: "Cloud & DevOps",
+                    icon: <Cloud className="w-5 h-5 text-[#FBBC05]" />,
+                  },
+                  {
+                    id: "mobile-ranger",
+                    label: "Android & IoT",
+                    icon: <Smartphone className="w-5 h-5 text-[#A855F7]" />,
+                  },
                 ].map((item) => (
                   <button
                     type="button"
@@ -148,7 +164,7 @@ export function JoinPanel() {
                         : "bg-white hover:bg-zinc-50 opacity-80"
                     }`}
                   >
-                    <div className="text-xl">{item.icon}</div>
+                    <div className="p-1 inline-block">{item.icon}</div>
                     <div className="text-xs font-black font-comic uppercase mt-1">
                       {item.label}
                     </div>
@@ -183,7 +199,7 @@ export function JoinPanel() {
                 <AlertCircle className="w-4 h-4 shrink-0 text-[#DC2626] mt-0.5" />
                 <div className="flex-1 space-y-1">
                   <div className="font-comic font-black uppercase tracking-wider">
-                    ⚠ FIRESTORE TRANSMISSION NOTICE
+                    FIRESTORE TRANSMISSION NOTICE
                   </div>
                   <div className="text-[11px] font-sans text-zinc-700">
                     {errorMessage}
@@ -211,8 +227,9 @@ export function JoinPanel() {
 
             {/* Submit Button with Dynamic Comic Impact Burst */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-[11px] text-zinc-500 font-medium">
-                ⚡ Real-time synchronization powered by Firebase & Google Cloud.
+              <div className="text-[11px] text-zinc-500 font-medium flex items-center gap-1.5">
+                <Zap className="w-3.5 h-3.5 text-[#FF5E57]" />
+                <span>Real-time synchronization powered by Firebase & Google Cloud.</span>
               </div>
 
               <div className="relative">
@@ -223,7 +240,7 @@ export function JoinPanel() {
                   disabled={isSubmitting}
                   withBurst={!isSubmitting}
                   burstColor="#FBBC05"
-                  soundEffect={isSubmitting ? "SYNC!" : "POW!"}
+                  soundEffect={isSubmitting ? "SYNC!" : "SUBMIT!"}
                   icon={
                     isSubmitting ? (
                       <Loader2 className="w-4 h-4 animate-spin" />
@@ -248,8 +265,9 @@ export function JoinPanel() {
           className="p-8 text-center bg-[#FFFDF8]"
         >
           <div className="max-w-md mx-auto space-y-4">
-            <div className="inline-block -rotate-6 px-4 py-1.5 bg-[#22C55E] text-white ink-border text-base font-black font-comic tracking-widest uppercase ink-shadow">
-              ★ HERO LICENSE MINTED ★
+            <div className="inline-flex items-center gap-1.5 -rotate-6 px-4 py-1.5 bg-[#22C55E] text-white ink-border text-base font-black font-comic tracking-widest uppercase ink-shadow">
+              <ShieldCheck className="w-5 h-5" />
+              <span>HERO LICENSE MINTED</span>
             </div>
 
             <h3 className="text-3xl font-black font-comic tracking-wide text-[#121214]">

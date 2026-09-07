@@ -53,8 +53,9 @@ export function QuestPanel({ quest, index }: QuestPanelProps) {
 
             {/* Comic Cleared Stamp vs Locked Stamp */}
             {!isUpcoming && quest.clearedStamp && (
-              <div className="shrink-0 -rotate-12 px-2.5 py-1 bg-[#22C55E] text-white ink-border-2 text-[10px] font-black tracking-widest uppercase ink-shadow-sm font-comic animate-pulse">
-                ✓ {quest.clearedStamp}
+              <div className="shrink-0 -rotate-12 px-2.5 py-1 bg-[#22C55E] text-white ink-border-2 text-[10px] font-black tracking-widest uppercase ink-shadow-sm font-comic animate-pulse flex items-center gap-1">
+                <CheckCircle2 className="w-3 h-3" />
+                <span>{quest.clearedStamp}</span>
               </div>
             )}
 
@@ -119,9 +120,9 @@ export function QuestPanel({ quest, index }: QuestPanelProps) {
         >
           <div className="font-comic font-black tracking-wide">
             {isUpcoming ? (
-              <span>⚠ TRANSMISSION ENCRYPTED! Unlock this quest at the next GDG meeting.</span>
+              <span>TRANSMISSION ENCRYPTED: Unlock this quest at the next GDG meeting.</span>
             ) : (
-              <span>★ QUEST RECORD: Cleared with highest honors by the Pixel Nova chapter!</span>
+              <span>QUEST RECORD: Cleared with highest honors by the Pixel Nova chapter!</span>
             )}
           </div>
         </SpeechBubble>

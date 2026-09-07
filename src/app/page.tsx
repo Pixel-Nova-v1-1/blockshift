@@ -71,7 +71,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="text-xs font-comic font-bold text-zinc-600 uppercase tracking-wide">
-                💡 Tap or hover characters to inspect stats & bio dialogue
+                Tap or hover characters to inspect stats & bio dialogue
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="text-xs font-comic font-bold text-zinc-600 uppercase tracking-wide">
-                ⭐ Color = Cleared Quests • Greyscale = Upcoming Locked Missions
+                Color = Cleared Quests • Greyscale = Upcoming Locked Missions
               </p>
             </div>
 
@@ -123,7 +123,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="text-xs font-comic font-bold text-zinc-600 uppercase tracking-wide">
-                📁 Memory snippets from hackathons & open source releases
+                Memory snippets from hackathons & open source releases
               </p>
             </div>
 
@@ -149,7 +149,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="text-xs font-comic font-bold text-zinc-600 uppercase tracking-wide">
-                ⚔ Forge your adventurer license and join Pixel Nova GDG
+                Forge your adventurer license and join Pixel Nova GDG
               </p>
             </div>
 
@@ -172,7 +172,7 @@ export default function HomePage() {
                 </h2>
               </div>
               <p className="text-xs font-comic font-bold text-zinc-600 uppercase tracking-wide">
-                📜 The origin story, manifesto, and community alliances
+                The origin story, manifesto, and community alliances
               </p>
             </div>
 

@@ -34,7 +34,7 @@ export function CoverPanel({ onStartReading, onJumpToChapter }: CoverPanelProps)
           </div>
 
           <div className="flex items-center gap-3 text-xs font-black font-comic tracking-wider text-zinc-700">
-            <span className="hidden md:inline text-[#FF5E57]">★ 100% OPEN SOURCE</span>
+            <span className="hidden md:inline text-[#FF5E57]">100% OPEN SOURCE</span>
             <span className="px-2 py-0.5 bg-[#FEF08A] ink-border-2 text-[10px] uppercase ink-shadow-sm">
               RATED: ALL DEVELOPERS
             </span>
@@ -47,8 +47,9 @@ export function CoverPanel({ onStartReading, onJumpToChapter }: CoverPanelProps)
           <div className="lg:col-span-8 space-y-5 text-left relative">
             {/* Impact sticker in corner */}
             <div className="absolute -top-6 -left-2 sm:-left-6 pointer-events-none z-20">
-              <span className="inline-block px-3 py-1 bg-[#FEF08A] ink-border text-xs font-black uppercase text-[#121214] -rotate-12 ink-shadow font-comic">
-                🔥 NEW CHAPTER ARC!
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#FEF08A] ink-border text-xs font-black uppercase text-[#121214] -rotate-12 ink-shadow font-comic">
+                <Flame className="w-3.5 h-3.5 text-[#FF5E57]" />
+                <span>NEW CHAPTER ARC</span>
               </span>
             </div>
 

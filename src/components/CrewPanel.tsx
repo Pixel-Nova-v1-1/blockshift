@@ -171,7 +171,7 @@ export function CrewPanel({ member, index }: CrewPanelProps) {
 
         {/* Hero codename tag */}
         <div className="absolute bottom-2 left-2 px-2.5 py-0.5 bg-white text-[#121214] text-[11px] font-black uppercase ink-border-2 ink-shadow-sm font-comic">
-          ★ {member.heroName}
+          {member.heroName}
         </div>
       </div>
     );

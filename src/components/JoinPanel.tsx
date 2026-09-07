@@ -5,7 +5,9 @@ import confetti from "canvas-confetti";
 import { ComicPanel } from "./ComicPanel";
 import { InkButton } from "./InkButton";
 import { SpeechBubble } from "./SpeechBubble";
-import { ShieldCheck, Sparkles, User, Mail, Compass, Award } from "lucide-react";
+import { ShieldCheck, Sparkles, User, Mail, Compass, Award, AlertCircle, Loader2 } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export function JoinPanel() {
   const [formData, setFormData] = useState({
@@ -15,20 +17,48 @@ export function JoinPanel() {
     experience: "Journeyman (Lv. 15)",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [recruitId, setRecruitId] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.heroName || !formData.email) return;
 
-    // Trigger comic confetti burst
-    confetti({
-      particleCount: 75,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ["#FF5E57", "#FBBC05", "#4285F4", "#34A853", "#121214"],
-    });
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
-    setSubmitted(true);
+    try {
+      // Save hero recruit to Firestore database collection 'guild_recruits'
+      const docRef = await addDoc(collection(db, "guild_recruits"), {
+        heroName: formData.heroName.trim(),
+        email: formData.email.trim(),
+        classRole: formData.classRole,
+        experience: formData.experience,
+        createdAt: serverTimestamp(),
+        status: "enlisted",
+        source: "pixel-nova-web",
+      });
+
+      const formattedId = docRef.id.slice(0, 6).toUpperCase();
+      setRecruitId(formattedId);
+
+      // Trigger comic confetti burst
+      confetti({
+        particleCount: 85,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ["#FF5E57", "#FBBC05", "#4285F4", "#34A853", "#121214"],
+      });
+
+      setSubmitted(true);
+    } catch (err: unknown) {
+      console.error("Firebase Firestore enlistment error:", err);
+      const msg = err instanceof Error ? err.message : "Failed to record recruit signal in Firestore database.";
+      setErrorMessage(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -147,10 +177,42 @@ export function JoinPanel() {
               </select>
             </div>
 
+            {/* Error Message Warning Banner */}
+            {errorMessage && (
+              <div className="p-3 bg-[#FEF2F2] ink-border-2 text-xs text-[#DC2626] font-bold flex items-start gap-2 ink-shadow-sm">
+                <AlertCircle className="w-4 h-4 shrink-0 text-[#DC2626] mt-0.5" />
+                <div className="flex-1 space-y-1">
+                  <div className="font-comic font-black uppercase tracking-wider">
+                    ⚠ FIRESTORE TRANSMISSION NOTICE
+                  </div>
+                  <div className="text-[11px] font-sans text-zinc-700">
+                    {errorMessage}
+                  </div>
+                  <div className="pt-1 flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        confetti({
+                          particleCount: 70,
+                          spread: 80,
+                          origin: { y: 0.6 },
+                        });
+                        setRecruitId("LOCAL");
+                        setSubmitted(true);
+                      }}
+                      className="text-[10px] uppercase font-black font-comic underline text-[#121214] hover:text-[#FF5E57] cursor-pointer"
+                    >
+                      [DEV: PROCEED TO HERO LICENSE ANYWAY]
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Submit Button with Dynamic Comic Impact Burst */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-[11px] text-zinc-500 font-medium">
-                ⚡ No subscription fees. Unconditional camaraderie guaranteed.
+                ⚡ Real-time synchronization powered by Firebase & Google Cloud.
               </div>
 
               <div className="relative">
@@ -158,12 +220,19 @@ export function JoinPanel() {
                   type="submit"
                   variant="primary"
                   size="lg"
-                  withBurst={true}
+                  disabled={isSubmitting}
+                  withBurst={!isSubmitting}
                   burstColor="#FBBC05"
-                  soundEffect="POW!"
-                  icon={<Sparkles className="w-4 h-4" />}
+                  soundEffect={isSubmitting ? "SYNC!" : "POW!"}
+                  icon={
+                    isSubmitting ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Sparkles className="w-4 h-4" />
+                    )
+                  }
                 >
-                  FORGE CHARACTER ➔
+                  {isSubmitting ? "SAVING TO CLOUD..." : "FORGE CHARACTER ➔"}
                 </InkButton>
               </div>
             </div>
@@ -189,6 +258,12 @@ export function JoinPanel() {
 
             <div className="bg-white p-4 ink-border-2 text-left space-y-2 ink-shadow-sm">
               <div className="flex justify-between border-b pb-1 text-xs">
+                <span className="font-bold text-zinc-500">RECRUIT ID:</span>
+                <span className="font-black font-mono text-[#FF5E57]">
+                  #NOVA-{recruitId || "ENLISTED"}
+                </span>
+              </div>
+              <div className="flex justify-between border-b pb-1 text-xs">
                 <span className="font-bold text-zinc-500">HERO DESIGNATION:</span>
                 <span className="font-black font-comic">{formData.heroName}</span>
               </div>
@@ -209,14 +284,22 @@ export function JoinPanel() {
             </div>
 
             <p className="text-xs text-zinc-600 font-medium">
-              We've beamed a welcome packet to your comm beacon. Join our Discord and prepare for the next chapter quest!
+              Data successfully transmitted to Firebase Firestore. We've beamed a welcome packet to your comm beacon. Prepare for the next chapter quest!
             </p>
 
             <div className="pt-2">
               <InkButton
                 variant="black"
                 size="md"
-                onClick={() => setSubmitted(false)}
+                onClick={() => {
+                  setSubmitted(false);
+                  setFormData({
+                    heroName: "",
+                    email: "",
+                    classRole: "ai-summoner",
+                    experience: "Journeyman (Lv. 15)",
+                  });
+                }}
               >
                 ← ENLIST ANOTHER ADVENTURER
               </InkButton>

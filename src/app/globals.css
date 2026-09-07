@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+:root {
+  --paper-cream: #FAF6EE;
+  --paper-cream-dark: #F3ECE0;
+  --ink-black: #121214;
+  --ink-black-pure: #000000;
+  --coral-accent: #FF5E57;
+  --coral-accent-light: #FF7B72;
+  --coral-accent-hover: #E64A43;
+  --gdg-blue: #4285F4;
+  --gdg-green: #34A853;
+  --gdg-yellow: #FBBC05;
+  --gdg-red: #EA4335;
+}
+
+/* Base Body Comic Feel */
+body {
+  background-color: var(--paper-cream);
+  color: var(--ink-black);
+  overflow-x: hidden;
+  font-feature-settings: "ss01", "ss02", "cv01";
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Comic Halftone Repeating Patterns */
+.comic-halftone {
+  background-image: radial-gradient(circle, rgba(18, 18, 20, 0.14) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+}
+
+.comic-halftone-dense {
+  background-image: radial-gradient(circle, rgba(18, 18, 20, 0.22) 1.8px, transparent 1.8px);
+  background-size: 6px 6px;
+}
+
+.comic-halftone-coral {
+  background-image: radial-gradient(circle, rgba(255, 94, 87, 0.28) 2px, transparent 2px);
+  background-size: 8px 8px;
+}
+
+.comic-halftone-white {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 1.5px, transparent 1.5px);
+  background-size: 7px 7px;
+}
+
+/* Comic Ink Borders & Shadows */
+.ink-border {
+  border: 3.5px solid var(--ink-black);
+}
+
+.ink-border-2 {
+  border: 2px solid var(--ink-black);
+}
+
+.ink-border-dashed {
+  border: 3.5px dashed var(--ink-black);
+}
+
+.ink-shadow-sm {
+  box-shadow: 2px 2px 0px var(--ink-black);
+}
+
+.ink-shadow {
+  box-shadow: 4px 4px 0px var(--ink-black);
+}
+
+.ink-shadow-lg {
+  box-shadow: 7px 7px 0px var(--ink-black);
+}
+
+.ink-shadow-coral {
+  box-shadow: 4px 4px 0px var(--coral-accent);
+}
+
+.ink-shadow-coral-lg {
+  box-shadow: 7px 7px 0px var(--coral-accent);
+}
+
+/* Comic Stamp / Badge */
+.comic-stamp {
+  border: 3px solid #121214;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  transform: rotate(-3deg);
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+}
+
+/* 3D Book & Page Flip Containers */
+.perspective-book {
+  perspective: 2500px;
+  perspective-origin: 50% 50%;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Manga Page Edge Shadow (for turning effect) */
+.page-edge-shadow-right {
+  box-shadow: inset -15px 0 25px -10px rgba(0, 0, 0, 0.35);
+}
+
+.page-edge-shadow-left {
+  box-shadow: inset 15px 0 25px -10px rgba(0, 0, 0, 0.35);
+}
+
+/* Manga Action / Speed Lines background */
+.manga-action-lines {
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(18, 18, 20, 0.04) 0deg 3deg,
+    transparent 3deg 6deg
+  );
+}
+
+/* Screentone diagonal grid */
+.comic-screentone-diagonal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(18, 18, 20, 0.06),
+    rgba(18, 18, 20, 0.06) 1px,
+    transparent 1px,
+    transparent 5px
+  );
+}
+
+/* Custom scrollbar for inside panels if needed */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-cream-dark);
+  border-left: 2px solid var(--ink-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink-black);
+  border: 1px solid var(--paper-cream);
+}
+
+/* Comic Fonts */
+.font-comic {
+  font-family: var(--font-bangers), "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.font-dialogue {
+  font-family: var(--font-comic-neue), "Comic Sans MS", cursive, sans-serif;
+}

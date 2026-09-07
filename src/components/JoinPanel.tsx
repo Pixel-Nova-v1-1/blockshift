@@ -1,0 +1,229 @@
+"use client";
+
+import React, { useState } from "react";
+import confetti from "canvas-confetti";
+import { ComicPanel } from "./ComicPanel";
+import { InkButton } from "./InkButton";
+import { SpeechBubble } from "./SpeechBubble";
+import { ShieldCheck, Sparkles, User, Mail, Compass, Award } from "lucide-react";
+
+export function JoinPanel() {
+  const [formData, setFormData] = useState({
+    heroName: "",
+    email: "",
+    classRole: "ai-summoner",
+    experience: "Journeyman (Lv. 15)",
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.heroName || !formData.email) return;
+
+    // Trigger comic confetti burst
+    confetti({
+      particleCount: 75,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ["#FF5E57", "#FBBC05", "#4285F4", "#34A853", "#121214"],
+    });
+
+    setSubmitted(true);
+  };
+
+  return (
+    <div className="max-w-3xl mx-auto w-full">
+      {!submitted ? (
+        <ComicPanel
+          caption="CHARACTER CREATION SHEET // NEW GUILD RECRUIT"
+          captionBg="coral"
+          halftone="default"
+          elevation="lg"
+          className="p-6 md:p-8 bg-[#FFFDF8]"
+        >
+          {/* Header instructions with speech bubble */}
+          <div className="flex flex-col md:flex-row items-center gap-4 mb-6 pb-4 border-b-2 border-[#121214]/20">
+            <div className="w-16 h-16 shrink-0 bg-[#FF5E57] ink-border ink-shadow flex items-center justify-center -rotate-3">
+              <User className="w-9 h-9 text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-black font-comic tracking-wide text-[#121214]">
+                ENLIST IN THE PIXEL NOVA GUILD
+              </h3>
+              <p className="text-xs text-zinc-600 font-medium">
+                Fill out your hero credentials to receive our secret chapter transmissions, hackathon invitations, and workshop access codes.
+              </p>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Hero Codename */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-black font-comic uppercase tracking-wider text-[#121214] flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-[#FF5E57]" />
+                  Hero Codename / Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Satoshi or Alex Rivera"
+                  value={formData.heroName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, heroName: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2.5 bg-white ink-border-2 text-sm font-medium text-[#121214] focus:outline-none focus:bg-[#FFF9E6] transition-colors ink-shadow-sm"
+                />
+              </div>
+
+              {/* Email / Frequency */}
+              <div className="space-y-1.5">
+                <label className="block text-xs font-black font-comic uppercase tracking-wider text-[#121214] flex items-center gap-1.5">
+                  <Mail className="w-3.5 h-3.5 text-[#4285F4]" />
+                  Comm Beacon / Email *
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="alex@student.edu"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2.5 bg-white ink-border-2 text-sm font-medium text-[#121214] focus:outline-none focus:bg-[#FFF9E6] transition-colors ink-shadow-sm"
+                />
+              </div>
+            </div>
+
+            {/* Class Role Select */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-black font-comic uppercase tracking-wider text-[#121214] flex items-center gap-1.5">
+                <Compass className="w-3.5 h-3.5 text-[#34A853]" />
+                Choose Your Guild Specialization
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                {[
+                  { id: "ai-summoner", label: "AI & ML", icon: "🧠", color: "border-[#34A853]" },
+                  { id: "pixel-paladin", label: "Frontend & UI", icon: "🎨", color: "border-[#4285F4]" },
+                  { id: "cloud-sorcerer", label: "Cloud & DevOps", icon: "☁️", color: "border-[#FBBC05]" },
+                  { id: "mobile-ranger", label: "Android & IoT", icon: "📱", color: "border-[#A855F7]" },
+                ].map((item) => (
+                  <button
+                    type="button"
+                    key={item.id}
+                    onClick={() => setFormData({ ...formData, classRole: item.id })}
+                    className={`p-2.5 text-left ink-border-2 transition-all cursor-pointer ${
+                      formData.classRole === item.id
+                        ? "bg-[#FEF08A] ink-shadow scale-[1.02] font-black"
+                        : "bg-white hover:bg-zinc-50 opacity-80"
+                    }`}
+                  >
+                    <div className="text-xl">{item.icon}</div>
+                    <div className="text-xs font-black font-comic uppercase mt-1">
+                      {item.label}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Experience Bracket */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-black font-comic uppercase tracking-wider text-[#121214] flex items-center gap-1.5">
+                <Award className="w-3.5 h-3.5 text-[#FBBC05]" />
+                Current Adventurer Level
+              </label>
+              <select
+                value={formData.experience}
+                onChange={(e) =>
+                  setFormData({ ...formData, experience: e.target.value })
+                }
+                className="w-full px-3.5 py-2.5 bg-white ink-border-2 text-xs font-bold font-comic uppercase text-[#121214] focus:outline-none ink-shadow-sm"
+              >
+                <option>Novice Recruit (Lv. 1 — Eager to learn)</option>
+                <option>Journeyman (Lv. 15 — Shipped class projects)</option>
+                <option>Dungeon Raider (Lv. 30 — Hackathon veteran)</option>
+                <option>Guild Archmage (Lv. 50 — Open source contributor)</option>
+              </select>
+            </div>
+
+            {/* Submit Button with Dynamic Comic Impact Burst */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-[11px] text-zinc-500 font-medium">
+                ⚡ No subscription fees. Unconditional camaraderie guaranteed.
+              </div>
+
+              <div className="relative">
+                <InkButton
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  withBurst={true}
+                  burstColor="#FBBC05"
+                  soundEffect="POW!"
+                  icon={<Sparkles className="w-4 h-4" />}
+                >
+                  FORGE CHARACTER ➔
+                </InkButton>
+              </div>
+            </div>
+          </form>
+        </ComicPanel>
+      ) : (
+        /* Minted Hero License Comic Card */
+        <ComicPanel
+          caption="OFFICIAL GUILD PASSPORT // VERIFIED HERO"
+          captionBg="yellow"
+          halftone="coral"
+          elevation="lg"
+          className="p-8 text-center bg-[#FFFDF8]"
+        >
+          <div className="max-w-md mx-auto space-y-4">
+            <div className="inline-block -rotate-6 px-4 py-1.5 bg-[#22C55E] text-white ink-border text-base font-black font-comic tracking-widest uppercase ink-shadow">
+              ★ HERO LICENSE MINTED ★
+            </div>
+
+            <h3 className="text-3xl font-black font-comic tracking-wide text-[#121214]">
+              WELCOME TO PIXEL NOVA, {formData.heroName.toUpperCase()}!
+            </h3>
+
+            <div className="bg-white p-4 ink-border-2 text-left space-y-2 ink-shadow-sm">
+              <div className="flex justify-between border-b pb-1 text-xs">
+                <span className="font-bold text-zinc-500">HERO DESIGNATION:</span>
+                <span className="font-black font-comic">{formData.heroName}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1 text-xs">
+                <span className="font-bold text-zinc-500">COMM BEACON:</span>
+                <span className="font-mono text-[11px]">{formData.email}</span>
+              </div>
+              <div className="flex justify-between border-b pb-1 text-xs">
+                <span className="font-bold text-zinc-500">CLASS GUILD:</span>
+                <span className="font-black text-[#FF5E57] uppercase font-comic">
+                  {formData.classRole.replace("-", " ")}
+                </span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="font-bold text-zinc-500">RANK:</span>
+                <span className="font-bold">{formData.experience}</span>
+              </div>
+            </div>
+
+            <p className="text-xs text-zinc-600 font-medium">
+              We've beamed a welcome packet to your comm beacon. Join our Discord and prepare for the next chapter quest!
+            </p>
+
+            <div className="pt-2">
+              <InkButton
+                variant="black"
+                size="md"
+                onClick={() => setSubmitted(false)}
+              >
+                ← ENLIST ANOTHER ADVENTURER
+              </InkButton>
+            </div>
+          </div>
+        </ComicPanel>
+      )}
+    </div>
+  );
+}

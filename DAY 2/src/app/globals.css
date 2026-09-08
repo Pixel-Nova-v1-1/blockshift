@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --chalk-white: #dad7ce;
+    --chalk-dust: rgba(220, 215, 205, 0.25);
+    --chalkboard-frame: #2c1a11;
+    --chalkboard-frame-light: #482a1a;
+    --chalkboard-green: #0b1711;
+    --chalkboard-dark: #050b08;
+    --accent-orange: #ff3b14;
+    --accent-orange-light: #ff6633;
+    --accent-orange-glow: rgba(255, 59, 20, 0.45);
+    --horror-red: #ff1133;
+    --horror-void: #030504;
+    --terminal-cyan: #00ffcc;
+  }
+
+  body {
+    background-color: var(--horror-void);
+    color: var(--chalk-white);
+    overflow-x: hidden;
+    user-select: none;
+    font-feature-settings: "ss01", "ss02", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom chalk & monospace fonts */
+.font-chalk {
+  font-family: var(--font-caveat), "Comic Sans MS", cursive, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.font-terminal {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Horror Chalk Text with Ghostly Glow */
+.chalk-text {
+  color: #dfdbd2;
+  text-shadow: 
+    0 0 2px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(200, 220, 210, 0.25),
+    2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.chalk-text-horror {
+  color: #ff3b14;
+  text-shadow: 
+    0 0 3px rgba(255, 59, 20, 0.9),
+    0 0 12px rgba(255, 17, 51, 0.7),
+    2px 2px 4px rgba(0, 0, 0, 0.95);
+}
+
+.chalk-text-dim {
+  color: rgba(180, 175, 165, 0.55);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Scratchy Strikethrough */
+.chalk-strike {
+  position: relative;
+  display: inline-block;
+}
+
+.chalk-strike::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 54%;
+  right: -6px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    rgba(255, 59, 20, 0.95) 0%, 
+    rgba(255, 255, 255, 0.85) 50%, 
+    rgba(255, 17, 51, 0.9) 100%);
+  transform: rotate(-1.5deg);
+  border-radius: 9999px;
+  box-shadow: 0 0 8px rgba(255, 59, 20, 0.8);
+  pointer-events: none;
+  animation: chalkScratch 0.22s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+  transform-origin: left center;
+}
+
+@keyframes chalkScratch {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    opacity: 0;
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
+}
+
+/* Dark Haunted Wooden Chalkboard Frame */
+.chalk-board-frame {
+  background: linear-gradient(135deg, #3d2315 0%, #20110a 50%, #0d0704 100%);
+  box-shadow: 
+    0 30px 70px -10px rgba(0, 0, 0, 0.95),
+    0 0 35px rgba(255, 59, 20, 0.08),
+    inset 0 2px 3px rgba(255, 255, 255, 0.08),
+    inset 0 -3px 4px rgba(0, 0, 0, 0.9);
+}
+
+.chalk-tray {
+  background: linear-gradient(180deg, #381f13 0%, #170b06 100%);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.9),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+/* Analog Horror Flickering Light */
+@keyframes eerieFlicker {
+  0%, 100% { opacity: 0.98; }
+  12% { opacity: 0.82; }
+  24% { opacity: 0.95; }
+  36% { opacity: 0.4; }
+  37% { opacity: 0.9; }
+  38% { opacity: 0.2; }
+  40% { opacity: 0.95; }
+  68% { opacity: 0.88; }
+  72% { opacity: 0.35; }
+  73% { opacity: 0.98; }
+  85% { opacity: 0.75; }
+  92% { opacity: 0.98; }
+}
+
+.horror-light-flicker {
+  animation: eerieFlicker 6s infinite;
+}
+
+/* CRT Scanlines Overlay */
+.scanlines-overlay {
+  background: linear-gradient(
+    rgba(10, 5, 5, 0) 50%, 
+    rgba(0, 0, 0, 0.5) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Deep Red Vignette for Dread */
+.vignette-layer {
+  box-shadow: 
+    inset 0 0 140px rgba(0, 0, 0, 0.95),
+    inset 0 0 60px rgba(255, 17, 51, 0.08);
+  pointer-events: none;
+}
+
+/* Chromatic Aberration */
+.glitch-rgb-active {
+  animation: rgbSplitHorror 0.18s infinite alternate;
+}
+
+@keyframes rgbSplitHorror {
+  0% {
+    text-shadow: -3px 0 #ff1133, 3px 0 #00ffcc;
+    transform: translate(0, 0);
+  }
+  50% {
+    text-shadow: 3px 0 #ff1133, -3px 0 #00ffcc;
+    transform: translate(-1.5px, 1px);
+  }
+  100% {
+    text-shadow: -2px 0 #ff1133, 2px 0 #00ffcc;
+    transform: translate(1.5px, -1px);
+  }
+}
+
+/* Micro Jitter */
+@keyframes microJitter {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-1.5px, 1px); }
+  40% { transform: translate(1.5px, -0.5px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(0.5px, 1.5px); }
+}
+
+.animate-micro-jitter {
+  animation: microJitter 0.12s ease-in-out infinite;
+}
+
+/* Violent Screen Slice Tear */
+@keyframes screenSlice {
+  0% {
+    clip-path: inset(35% 0 55% 0);
+    transform: skew(1.2deg);
+  }
+  20% {
+    clip-path: inset(88% 0 2% 0);
+    transform: skew(-2.5deg);
+  }
+  40% {
+    clip-path: inset(5% 0 80% 0);
+    transform: skew(1.8deg);
+  }
+  60% {
+    clip-path: inset(62% 0 25% 0);
+    transform: skew(-1.5deg);
+  }
+  80% {
+    clip-path: inset(18% 0 65% 0);
+    transform: skew(2.2deg);
+  }
+  100% {
+    clip-path: inset(75% 0 8% 0);
+    transform: skew(0deg);
+  }
+}
+
+.glitch-slice-effect {
+  animation: screenSlice 0.22s steps(2, start) infinite;
+}
+
+/* Heavy static burst */
+@keyframes staticFlicker {
+  0%, 100% { opacity: 0.95; }
+  25% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+  75% { opacity: 0.35; }
+}
+
+.climax-static {
+  animation: staticFlicker 0.06s steps(2) infinite;
+}
+
+/* Dark Chalk Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 14, 11, 0.9);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 59, 20, 0.3);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 59, 20, 0.8);
+}

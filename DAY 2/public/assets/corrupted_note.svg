@@ -1,0 +1,65 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Torn paper background -->
+  <defs>
+    <filter id="shadow" x="-10" y="-10" width="420" height="320" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7EE"/>
+      <stop offset="100%" stop-color="#EFE7D5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Paper Path with torn jagged bottom edge -->
+  <path d="M 20 20 
+           L 380 20 
+           L 375 240 
+           L 350 235 
+           L 330 250 
+           L 305 238 
+           L 280 248 
+           L 255 236 
+           L 230 249 
+           L 200 238 
+           L 170 252 
+           L 140 237 
+           L 110 248 
+           L 80 235 
+           L 50 246 
+           L 25 235 
+           Z" 
+        fill="url(#paperGrad)" 
+        stroke="#D9CEBA" 
+        stroke-width="2" 
+        filter="url(#shadow)" />
+
+  <!-- Grid lines on paper -->
+  <line x1="40" y1="65" x2="360" y2="65" stroke="#E2D9C5" stroke-width="1.5" stroke-dasharray="4 4" />
+  <line x1="40" y1="105" x2="360" y2="105" stroke="#E2D9C5" stroke-width="1.5" stroke-dasharray="4 4" />
+  <line x1="40" y1="145" x2="360" y2="145" stroke="#E2D9C5" stroke-width="1.5" stroke-dasharray="4 4" />
+  <line x1="40" y1="185" x2="360" y2="185" stroke="#E2D9C5" stroke-width="1.5" stroke-dasharray="4 4" />
+
+  <!-- Tape on top -->
+  <rect x="150" y="10" width="100" height="22" rx="2" fill="#F4E8B0" fill-opacity="0.8" transform="rotate(-2 200 20)" />
+
+  <!-- Glitch digital artifacts / scrambled pixels -->
+  <rect x="190" y="55" width="45" height="14" fill="#FF6B00" fill-opacity="0.9" />
+  <rect x="240" y="58" width="25" height="8" fill="#00E5FF" fill-opacity="0.8" />
+  <rect x="70" y="98" width="60" height="12" fill="#1A1A1A" />
+  <rect x="135" y="95" width="20" height="16" fill="#FF6B00" />
+  <rect x="210" y="138" width="85" height="12" fill="#FF3B30" fill-opacity="0.75" />
+  <rect x="55" y="178" width="110" height="14" fill="#00E5FF" fill-opacity="0.8" />
+  
+  <!-- Red tape / warning tag -->
+  <rect x="35" y="32" width="76" height="18" rx="3" fill="#FF6B00" />
+  <text x="73" y="45" fill="#FFFFFF" font-family="monospace" font-weight="bold" font-size="9" text-anchor="middle" letter-spacing="1">ANOMALY</text>
+
+  <!-- Glitched text simulation -->
+  <text x="50" y="80" font-family="monospace" font-weight="bold" font-size="14" fill="#2C2B29">SESSION_NOTE // 0x48F</text>
+  <text x="50" y="120" font-family="monospace" font-size="12" fill="#504C46">STATUS: MEMORY DEVIATION</text>
+  <text x="50" y="160" font-family="monospace" font-size="12" fill="#504C46">TARGET: TAP TO STABILIZE MATRIX</text>
+  
+  <!-- Action prompt badge -->
+  <rect x="120" y="200" width="160" height="28" rx="14" fill="#122019" />
+  <text x="200" y="218" fill="#FF6B00" font-family="monospace" font-weight="bold" font-size="11" text-anchor="middle">CLICK TO PURGE [OK]</text>
+</svg>

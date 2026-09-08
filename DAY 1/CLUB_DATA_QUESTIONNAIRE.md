@@ -16,7 +16,7 @@ Fill in the answers below! Once you provide or fill in your answers, I will repl
 
 3. **College / University Name & Campus Location:**
    - *Current default:* `Metropolis Campus Hub 402`
-   - *Your answer: Pillai College of Engineering*
+   - *Your answer:*
 
 4. **Cover Tagline & Arc Subtitle:**
    - *Current default:* `ARC I: THE GENESIS SHIFT`
@@ -37,9 +37,9 @@ Fill in the answers below! Once you provide or fill in your answers, I will repl
 Provide details for up to 6 core team members (you can have 4-6):
 
 ### Member 1 (Lead Organizer)
-- **Full Name:*Aditya Nair*
+- **Full Name:**
 - **Hero Alias / Codename:** *(e.g. NovaPrime)*
-- **Official Role:** *(e.g.Lead & Organizer)*
+- **Official Role:** *(e.g. GDG Lead & Organizer)*
 - **Comic Guild Class:** *(e.g. Code Alchemist (Lv. 45))*
 - **Top 3-4 Skills:** *(e.g. System Arch, Python, Flutter, Cloud)*
 - **Short Bio:** *(1-2 sentences)*
@@ -47,18 +47,18 @@ Provide details for up to 6 core team members (you can have 4-6):
 - **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
 
 ### Member 2
-- **Full Name:*Anirudh Nair*
-- **Hero Alias / Codename:*The Clutch Master*
+- **Full Name:**
+- **Hero Alias / Codename:**
 - **Official Role:** *(e.g. Frontend & UI/UX Lead)*
 - **Comic Guild Class:** *(e.g. Pixel Paladin (Lv. 41))*
 - **Top 3-4 Skills:**
 - **Short Bio:**
 - **Catchphrase / Quote:**
-- **Stats (0-100):** Code: [ ], Design: [100 ], Caffeine: [1000 ]
+- **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
 
 ### Member 3
-- **Full Name:*Devjith Kurup*
-- **Hero Alias / Codename:*The Hacker*
+- **Full Name:**
+- **Hero Alias / Codename:**
 - **Official Role:** *(e.g. AI / Machine Learning Lead)*
 - **Comic Guild Class:** *(e.g. Neural Summoner (Lv. 43))*
 - **Top 3-4 Skills:**
@@ -66,7 +66,37 @@ Provide details for up to 6 core team members (you can have 4-6):
 - **Catchphrase / Quote:**
 - **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
 
+### Member 4
+- **Full Name:**
+- **Hero Alias / Codename:**
+- **Official Role:** *(e.g. Cloud & DevOps Lead)*
+- **Comic Guild Class:** *(e.g. Cloud Sorcerer (Lv. 39))*
+- **Top 3-4 Skills:**
+- **Short Bio:**
+- **Catchphrase / Quote:**
+- **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
 
+### Member 5 (Optional)
+- **Full Name:**
+- **Hero Alias / Codename:**
+- **Official Role:** *(e.g. Mobile & Android Lead)*
+- **Comic Guild Class:**
+- **Top 3-4 Skills:**
+- **Short Bio:**
+- **Catchphrase / Quote:**
+- **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
+
+### Member 6 (Optional)
+- **Full Name:**
+- **Hero Alias / Codename:**
+- **Official Role:** *(e.g. Community & Hackathon Lead)*
+- **Comic Guild Class:**
+- **Top 3-4 Skills:**
+- **Short Bio:**
+- **Catchphrase / Quote:**
+- **Stats (0-100):** Code: [ ], Design: [ ], Caffeine: [ ]
+
+---
 
 ## Section 3: Questline / Events Timeline (Chapter 3)
 
